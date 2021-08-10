@@ -14,6 +14,7 @@ getNextWord()
 document.addEventListener(
     'keyup',
     function (event) {
+        //check word correction
         if (event.code === "Space") {
             if (textInput.value === currentWord) {
                 gotACorrectWord()
@@ -24,6 +25,7 @@ document.addEventListener(
             textInput.value = ""
         }
 
+        //check character correction
         if (textInput.value !== currentWord.slice(0, textInput.value.length)) {
             gotAWrongCharacter()
         }

@@ -21,8 +21,17 @@ html, body {
     justify-content: space-between;
 }
 
-#mainPanel{
+#mainContainer{
     max-width: 30%;
+}
+
+#time{
+    padding: 18px;
+
+}
+
+#mainPanel{
+    max-width: 100%;
     background-color: rgb(99,105,106);
     display: flex;
     flex-direction: column;
@@ -68,5 +77,9 @@ html, body {
 
 #bottomPanel{
     padding: 18px;
+}
+
+*{
+    transition: color 0.3s, background-color 0.3s;
 }
 
