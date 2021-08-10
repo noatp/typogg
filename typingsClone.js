@@ -34,12 +34,12 @@ document.addEventListener(
 )
 
 function gotACorrectWord() {
-    currentSpan.style.color = "rgb(74,116,36)"
+    currentSpan.style.color = "rgb(134,180,82)"
     getNextWord()
 }
 
 function gotAWrongWord() {
-    currentSpan.style.color = "rgb(129,84,88)"
+    currentSpan.style.color = "rgb(222,72,48)"
     getNextWord()
 }
 
