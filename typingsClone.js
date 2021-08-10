@@ -1,42 +1,53 @@
 
 const textPanel = document.getElementById("textPanel")
 const textInput = document.getElementById("textInput")
+const timer = document.getElementById("timer")
 const wordLibrary = ['will', 'early', 'tell', 'how', 'do', 'and', 'possible', 'consider', 'on', 'some', 'late', 'program', 'against', 'about', 'now', 'under', 'fact', 'nation', 'there', 'no', 'during', 'first', 'not', 'part', 'I', 'own', 'there', 'those', 'another', 'leave', 'as', 'last', 'between', 'say', 'end', 'seem', 'some', 'head', 'good', 'again', 'have', 'be', 'can', 'as', 'part', 'back', 'increase', 'hold', 'this', 'high', 'home', 'too', 'by', 'since', 'by', 'both', 'since', 'down', 'another', 'want', 'old', 'all', 'will', 'may', 'from', 'without', 'thing', 'we', 'would', 'good', 'help', 'in', 'also', 'however', 'mean', 'now', 'only', 'part', 'both', 'move', 'think', 'keep', 'while', 'to', 'might', 'come', 'early', 'make', 'this', 'both', 'can', 'eye', 'ask', 'little', 'great', 'again', 'they', 'own', 'may', 'now', 'will', 'some', 'or', 'first', 'very', 'life', 'thing', 'like', 'do', 'point', 'large', 'since', 'course', 'thing', 'hand', 'thing', 'become', 'up', 'even', 'would', 'real', 'work', 'into', 'against', 'make', 'same', 'which', 'mean', 'only', 'house', 'be', 'by', 'however', 'write', 'another', 'line', 'child', 'of', 'because', 'which', 'long', 'even', 'give', 'good', 'ask', 'school', 'look', 'will', 'present', 'own', 'stand', 'group', 'be', 'it', 'down', 'world', 'all', 'write', 'world', 'against', 'a', 'too', 'never', 'order', 'turn', 'seem', 'tell', 'mean', 'present', 'should', 'here', 'much', 'make', 'new', 'change', 'follow', 'need', 'home', 'how', 'large', 'system', 'long', 'more', 'all', 'around', 'you', 'think', 'become', 'last', 'at', 'just', 'mean', 'begin', 'from', 'they', 'we', 'under', 'new', 'from', 'he', 'lead', 'write', 'school', 'few', 'line', 'because', 'under', 'what', 'not', 'consider', 'some', 'school', 'turn', 'as', 'early', 'change', 'give', 'it', 'world', 'for', 'too', 'into', 'keep', 'new', 'become', 'not', 'will', 'by', 'run', 'fact', 'or', 'fact', 'public', 'without', 'high', 'line', 'into', 'problem', 'course', 'the', 'after', 'take', 'mean', 'could', 'how', 'like', 'form', 'between', 'point', 'part']
 
 let currentSpan = null
 let spanQueue = []
 
+let startedTyping = false;
+let startTime = null;
+let currentTimeInSec = 0;
+
+let wordCount = 0;
+
 let difficulty = 50; //number of words
 
+//prep text panel
 generateTextPanel()
+//highlight first word
 getNextWord()
 
 document.addEventListener(
     'keyup',
     function (event) {
-        //check word correction
-        if (event.code === "Space") {
-            if (textInput.value === currentWord) {
-                gotACorrectWord()
-            }
-            else {
-                gotAWrongWord()
-            }
-            textInput.value = ""
+        if (startedTyping === false) {
+            startedTyping = true
+            startTime = Date.now()
+            setInterval(function () {
+                const timeElapsed = Date.now() - startTime
+                const timeElapsedInSec = Math.floor(timeElapsed / 1000)
+                console.log(timeElapsedInSec)
+                if (timeElapsedInSec === currentTimeInSec + 1) {
+                    currentTimeInSec += 1
+                    let wpm = Math.floor(60 * wordCount / currentTimeInSec)
+                    timer.textContent = `WPM: ${wpm}`
+                }
+            }, 100)
         }
+        //check word correcness
+        checkWord(event)
 
-        //check character correction
-        if (textInput.value !== currentWord.slice(0, textInput.value.length)) {
-            gotAWrongCharacter()
-        }
-        else {
-            gotACorrectCharacter()
-        }
+        //check character correcness
+        checkChar()
     }
 )
 
 function gotACorrectWord() {
     currentSpan.style.color = "rgb(134,180,82)"
+    wordCount += 1
     getNextWord()
 }
 
@@ -76,3 +87,23 @@ function getNextWord() {
     currentSpan.style.color = "rgb(243,166,35)"
 }
 
+function checkWord(event) {
+    if (event.code === "Space") {
+        if (textInput.value === currentWord) {
+            gotACorrectWord()
+        }
+        else {
+            gotAWrongWord()
+        }
+        textInput.value = ""
+    }
+}
+
+function checkChar() {
+    if (textInput.value !== currentWord.slice(0, textInput.value.length)) {
+        gotAWrongCharacter()
+    }
+    else {
+        gotACorrectCharacter()
+    }
+}
