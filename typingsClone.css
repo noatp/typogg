@@ -33,6 +33,7 @@ html, body {
 
 #textPanel{
     padding: 18px;
+    line-height: 1.5;
 }
 
 #textPanel span{
@@ -52,6 +53,9 @@ html, body {
     background-color: rgb(111,119,120);
     font:inherit;
     border-radius: 5px;
+    line-height: 2;
+    padding: 0px 8px;
+    margin: 0px 8px;
 }
 
 #redoButton{
@@ -59,6 +63,7 @@ html, body {
     border-radius: 5px;
     background-color: rgb(243,166,35);
     color: white;
+    margin: 0px 8px;
 }
 
 #bottomPanel{
