@@ -47,8 +47,7 @@ html, body {
 }
 
 #textInput{
-    min-width: 600px;
-    min-height: 30px;
+    width: 100%;
     color: white;
     background-color: rgb(111,119,120);
     font:inherit;
