@@ -10,6 +10,7 @@ let spanQueue = []
 let startedTyping = false;
 let startTime = null;
 let currentTimeInSec = 0;
+let ticking = null;
 
 let wordCount = 0;
 
@@ -26,7 +27,7 @@ document.addEventListener(
         if (startedTyping === false) {
             startedTyping = true
             startTime = Date.now()
-            setInterval(function () {
+            ticking = setInterval(function () {
                 const timeElapsed = Date.now() - startTime
                 const timeElapsedInSec = Math.floor(timeElapsed / 1000)
                 console.log(timeElapsedInSec)
@@ -83,8 +84,14 @@ function generateTextPanel() {
 
 function getNextWord() {
     currentSpan = spanQueue.shift()
-    currentWord = currentSpan.textContent
-    currentSpan.style.color = "rgb(243,166,35)"
+    if (currentSpan !== undefined) {
+        currentWord = currentSpan.textContent
+        currentSpan.style.color = "rgb(243,166,35)"
+    }
+    else {
+        finishedTyping()
+    }
+
 }
 
 function checkWord(event) {
@@ -106,4 +113,9 @@ function checkChar() {
     else {
         gotACorrectCharacter()
     }
+}
+
+function finishedTyping() {
+    console.log("finished")
+    clearInterval(ticking)
 }
