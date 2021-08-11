@@ -138,7 +138,6 @@ function startTimer() {
             let wpm = Math.floor(60 * wordCount / currentTimeInSec)
             timer.textContent = `WPM: ${wpm}`
         }
-        console.log(`RUNNING ${timeElapsed}`)
     }, 100)
 }
 
