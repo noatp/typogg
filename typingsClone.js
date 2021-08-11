@@ -14,7 +14,7 @@ let ticking = null;
 
 let wordCount = 0;
 
-let difficulty = 50; //number of words
+let difficulty = 100; //number of words
 
 //prep text panel
 generateTextPanel()
@@ -24,19 +24,13 @@ getNextWord()
 document.addEventListener(
     'keyup',
     function (event) {
+        if (event.code === "Escape") {
+            resetApp()
+        }
+
         if (startedTyping === false) {
             startedTyping = true
-            startTime = Date.now()
-            ticking = setInterval(function () {
-                const timeElapsed = Date.now() - startTime
-                const timeElapsedInSec = Math.floor(timeElapsed / 1000)
-                console.log(timeElapsedInSec)
-                if (timeElapsedInSec === currentTimeInSec + 1) {
-                    currentTimeInSec += 1
-                    let wpm = Math.floor(60 * wordCount / currentTimeInSec)
-                    timer.textContent = `WPM: ${wpm}`
-                }
-            }, 100)
+            startTimer()
         }
         //check word correcness
         checkWord(event)
@@ -47,7 +41,7 @@ document.addEventListener(
 )
 
 function gotACorrectWord() {
-    currentSpan.style.color = "rgb(134,180,82)"
+    currentSpan.style.color = "#78c81f"
     wordCount += 1
     getNextWord()
 }
@@ -62,7 +56,7 @@ function gotAWrongCharacter() {
 }
 
 function gotACorrectCharacter() {
-    textInput.style.backgroundColor = "rgb(111,119,120)"
+    textInput.style.backgroundColor = "#c5c7ff"
 }
 
 function getRandomInt(min, max) {
@@ -73,6 +67,7 @@ function getRandomInt(min, max) {
 
 function generateTextPanel() {
     spanQueue = []
+    currentSpan = null
     for (let i = 0; i < difficulty; i++) {
         let aWord = wordLibrary[getRandomInt(0, wordLibrary.length)]
         const newSpan = document.createElement("span")
@@ -86,7 +81,7 @@ function getNextWord() {
     currentSpan = spanQueue.shift()
     if (currentSpan !== undefined) {
         currentWord = currentSpan.textContent
-        currentSpan.style.color = "rgb(243,166,35)"
+        currentSpan.style.color = "#E5B510"
     }
     else {
         finishedTyping()
@@ -116,6 +111,36 @@ function checkChar() {
 }
 
 function finishedTyping() {
-    console.log("finished")
     clearInterval(ticking)
+}
+
+function startTimer() {
+    startTime = Date.now()
+    ticking = setInterval(function () {
+        const timeElapsed = Date.now() - startTime
+        const timeElapsedInSec = Math.floor(timeElapsed / 1000)
+        if (timeElapsedInSec === currentTimeInSec + 1) {
+            currentTimeInSec += 1
+            let wpm = Math.floor(60 * wordCount / currentTimeInSec)
+            timer.textContent = `WPM: ${wpm}`
+        }
+    }, 100)
+}
+
+function resetApp() {
+    finishedTyping()
+    const allSpans = document.querySelectorAll("#textPanel span")
+    allSpans.forEach(function (span) {
+        span.remove()
+    })
+    generateTextPanel()
+    //highlight first word
+    getNextWord()
+    startedTyping = false;
+    startTime = null;
+    currentTimeInSec = 0;
+    ticking = null;
+    wordCount = 0
+
+
 }

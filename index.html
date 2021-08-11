@@ -10,30 +10,57 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="typingsClone.css">
 </head>
 
 <body>
-    <div id="container">
-        <div>
-            <h1 id="theTitle">noat</h1>
-        </div>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="column d-flex flex-column justify-content-between align-items-center" id="columnContainer">
 
-        <div id="mainContainer">
-            <div id="timer">WPM: 0</div>
-            <div id="mainPanel">
-                <div id="textPanel"></div>
+                <div class="row">
+                    <div class="col p-5">
+                        <h1 class="display-1 text-center" id="title">typo.gg</h1>
+                    </div>
+                </div>
 
-                <div id="inputTextPanel">
-                    <input type="text" id="textInput">
-                    <button type="button" id="redoButton">Redo</button>
+                <div class="row justify-content-center" id="mainPanel">
+                    <div class="col-6 p-5">
+                        <div class="row py-1">
+                            <div class="col" id="timer">WPM: 0</div>
+                        </div>
+
+                        <div class="row py-1">
+                            <div class="col" id="textPanel"></div>
+                        </div>
+
+                        <div class="row py-3">
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="textInput">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" id="redoButton">Redo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col p-5">
+                        bottom stuff
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div id="bottomPanel">bottom stuff</div>
-
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
     <script src="typingsClone.js"></script>
 </body>
 

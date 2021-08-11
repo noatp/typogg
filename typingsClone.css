@@ -1,85 +1,21 @@
-html, body {
-    height: 100%;
-    width: 100%;
+body{
+    height: 100vh;
+    width: 100vw;    
     font-family: 'Roboto Mono', monospace;
     font-size: 18px;
-}
-#theTitle{
-    text-align: center;
-    font-size: 50px;
-    padding: 18px;
-    color: rgba(200,195,177,255);
+    color: #c5c7ff;
 }
 
-#container{
-    height: 100%;
-    width: 100%;
-    background-color: rgba(70,71,70,255);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#mainContainer{
-    max-width: 30%;
-}
-
-#timer{
-    padding: 18px;
-
-}
-
-#mainPanel{
-    max-width: 100%;
-    background-color: rgb(99,105,106);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 18px;
-    border-radius: 18px;
-}
-
-#textPanel{
-    padding: 18px;
-    line-height: 1.5;
-}
-
-#textPanel span{
-    color: white;
-}
-
-#inputTextPanel{
-    padding: 18px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+#columnContainer{
+    background: linear-gradient(120deg, #00296B 0.00%, #00509D 100.00%);
 }
 
 #textInput{
-    width: 100%;
-    color: white;
-    background-color: rgb(111,119,120);
-    font:inherit;
-    border-radius: 5px;
-    line-height: 2;
-    padding: 0px 8px;
-    margin: 0px 8px;
-}
-
-#redoButton{
-    font:inherit;
-    border-radius: 5px;
-    background-color: rgb(243,166,35);
-    color: white;
-    margin: 0px 8px;
-}
-
-#bottomPanel{
-    padding: 18px;
+    font: inherit;
+    background-color: #c5c7ff;
 }
 
 *{
-    transition: color 0.3s, background-color 0.3s;
+    transition: color 0.3s ease-in-out 0s, background-color 0.3s ease-in-out 0s;
 }
 
