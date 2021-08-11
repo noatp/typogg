@@ -27,6 +27,7 @@ document.addEventListener(
     function (event) {
         if (event.code === "Escape") {
             resetApp()
+            return
         }
 
         if (startedTyping === false) {
@@ -76,6 +77,11 @@ function getRandomInt(min, max) {
 function generateTextPanel() {
     spanQueue = []
     currentSpan = null
+    const allSpans = document.querySelectorAll("#textPanel span")
+    allSpans.forEach(function (span) {
+        span.remove()
+    })
+
     for (let i = 0; i < difficulty; i++) {
         let aWord = wordLibrary[getRandomInt(0, wordLibrary.length)]
         const newSpan = document.createElement("span")
@@ -132,22 +138,22 @@ function startTimer() {
             let wpm = Math.floor(60 * wordCount / currentTimeInSec)
             timer.textContent = `WPM: ${wpm}`
         }
+        console.log(`RUNNING ${timeElapsed}`)
     }, 100)
 }
 
 function resetApp() {
     finishedTyping()
-    const allSpans = document.querySelectorAll("#textPanel span")
-    allSpans.forEach(function (span) {
-        span.remove()
-    })
-    startedTyping = false;
+    initApp()
+}
+
+function initApp() {
+    generateTextPanel()
+    getNextWord()
     startTime = null;
     currentTimeInSec = 0;
     ticking = null;
-    wordCount = 0
-    generateTextPanel()
-    //highlight first word
-    getNextWord()
-
+    wordCount = 0;
+    startedTyping = false;
+    timer.textContent = `WPM: 0`
 }
