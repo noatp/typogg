@@ -19,3 +19,17 @@ body{
     transition: color 0.3s ease-in-out 0s, background-color 0.3s ease-in-out 0s;
 }
 
+#modal{
+    background: #00296B;
+    z-index: -1;
+}
+
+#disableModal{
+    font: inherit;
+    color: white;
+}
+
+#enableModal{
+    font: inherit;
+    color: white;
+}
