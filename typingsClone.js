@@ -118,6 +118,7 @@ themePurple.addEventListener(
     function () {
         currentColorTheme = colorThemes[1]
         applyTheme()
+        console.log("WHAT")
     }
 )
 
@@ -126,6 +127,7 @@ themeDefault.addEventListener(
     function () {
         currentColorTheme = colorThemes[0]
         applyTheme()
+        console.log("THE FUCK")
     }
 )
 
