@@ -18,7 +18,7 @@ let ticking = null;
 
 let wordCount = 0;
 
-let difficulty = 100; //number of words
+let difficulty = 150; //number of words
 
 //prep text panel
 generateTextPanel()
@@ -81,7 +81,7 @@ function gotAWrongWord() {
 }
 
 function gotAWrongCharacter() {
-    textInput.style.backgroundColor = "rgb(129,84,88)"
+    textInput.style.backgroundColor = "rgb(222,72,48)"
 }
 
 function gotACorrectCharacter() {
