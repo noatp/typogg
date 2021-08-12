@@ -7,7 +7,11 @@ body{
 }
 
 #columnContainer{
-    background: linear-gradient(120deg, #00296B 0.00%, #00509D 100.00%);
+    background: linear-gradient(60deg, #00296B 0.00%, rgb(31, 145, 207) 100.00%);
+}
+
+#mainPanel{
+    background-color:#00296B ;
 }
 
 #textInput{

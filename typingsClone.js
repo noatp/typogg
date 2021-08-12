@@ -26,13 +26,17 @@ generateTextPanel()
 getNextWord()
 
 document.addEventListener(
-    'keyup',
+    "keyup",
     function (event) {
         if (event.code === "Escape") {
             resetApp()
-            return
         }
+    }
+)
 
+textInput.addEventListener(
+    'keyup',
+    function (event) {
         if (startedTyping === false) {
             startedTyping = true
             startTimer()
