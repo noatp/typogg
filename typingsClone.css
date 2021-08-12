@@ -3,39 +3,29 @@ body{
     width: 100vw;    
     font-family: 'Roboto Mono', monospace;
     font-size: 18px;
-    color: #c5c7ff;
-}
-
-#columnContainer{
-    background: linear-gradient(60deg, #00296B 0.00%, rgb(31, 145, 207) 100.00%);
-}
-
-#mainPanel{
-    background-color:#0b5090;
 }
 
 #textInput{
     font: inherit;
-    background-color: #c5c7ff;
     transition: background-color 0.3s ease-in-out 0s;
 }
 
 #modal{
-    background: #00296B;
     z-index: -1;
 }
 
 #disableModal{
     font: inherit;
-    color: white;
 }
 
 #enableModal{
     font: inherit;
-    color: white;
 }
 
-*{
-    transition: color 0.3s ease-in-out 0s;
+.themeButton{
+    height: 100px;
+    width: 100px;
+    border-color: black!important;
+    color: white
 }
 
