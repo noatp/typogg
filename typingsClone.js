@@ -61,7 +61,7 @@ let wordCount = 0;
 
 let difficulty = 150; //number of words
 
-let currentColorTheme = colorThemes[1]
+let currentColorTheme = colorThemes[0]
 applyTheme()
 //prep text panel
 generateTextPanel()
