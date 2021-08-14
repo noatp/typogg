@@ -5,12 +5,13 @@ const redoButton = document.getElementById("redoButton")
 const enableModal = document.getElementById("enableModal")
 const disableModal = document.getElementById("disableModal")
 const modal = document.getElementById("modal")
-const timer = document.getElementById("timer")
+const wpmMeter = document.getElementById("wpmMeter")
 const body = document.body
 const columnContainer = document.getElementById("columnContainer")
 const mainPanel = document.getElementById("mainPanel")
 const themePurple = document.getElementById("themePurple")
 const themeDefault = document.getElementById("themeDefault")
+const accuracyMeter = document.getElementById("accuracyMeter")
 const wordLibrary = ['will', 'early', 'tell', 'how', 'do', 'and', 'possible', 'consider', 'on', 'some', 'late', 'program', 'against', 'about', 'now', 'under', 'fact', 'nation', 'there', 'no', 'during', 'first', 'not', 'part', 'I', 'own', 'there', 'those', 'another', 'leave', 'as', 'last', 'between', 'say', 'end', 'seem', 'some', 'head', 'good', 'again', 'have', 'be', 'can', 'as', 'part', 'back', 'increase', 'hold', 'this', 'high', 'home', 'too', 'by', 'since', 'by', 'both', 'since', 'down', 'another', 'want', 'old', 'all', 'will', 'may', 'from', 'without', 'thing', 'we', 'would', 'good', 'help', 'in', 'also', 'however', 'mean', 'now', 'only', 'part', 'both', 'move', 'think', 'keep', 'while', 'to', 'might', 'come', 'early', 'make', 'this', 'both', 'can', 'eye', 'ask', 'little', 'great', 'again', 'they', 'own', 'may', 'now', 'will', 'some', 'or', 'first', 'very', 'life', 'thing', 'like', 'do', 'point', 'large', 'since', 'course', 'thing', 'hand', 'thing', 'become', 'up', 'even', 'would', 'real', 'work', 'into', 'against', 'make', 'same', 'which', 'mean', 'only', 'house', 'be', 'by', 'however', 'write', 'another', 'line', 'child', 'of', 'because', 'which', 'long', 'even', 'give', 'good', 'ask', 'school', 'look', 'will', 'present', 'own', 'stand', 'group', 'be', 'it', 'down', 'world', 'all', 'write', 'world', 'against', 'a', 'too', 'never', 'order', 'turn', 'seem', 'tell', 'mean', 'present', 'should', 'here', 'much', 'make', 'new', 'change', 'follow', 'need', 'home', 'how', 'large', 'system', 'long', 'more', 'all', 'around', 'you', 'think', 'become', 'last', 'at', 'just', 'mean', 'begin', 'from', 'they', 'we', 'under', 'new', 'from', 'he', 'lead', 'write', 'school', 'few', 'line', 'because', 'under', 'what', 'not', 'consider', 'some', 'school', 'turn', 'as', 'early', 'change', 'give', 'it', 'world', 'for', 'too', 'into', 'keep', 'new', 'become', 'not', 'will', 'by', 'run', 'fact', 'or', 'fact', 'public', 'without', 'high', 'line', 'into', 'problem', 'course', 'the', 'after', 'take', 'mean', 'could', 'how', 'like', 'form', 'between', 'point', 'part']
 
 class colorTheme {
@@ -58,15 +59,13 @@ let currentTimeInSec = 0;
 let ticking = null;
 
 let wordCount = 0;
+let correctWordCount = 0;
 
-let difficulty = 150; //number of words
+let difficulty = 50; //number of words
 
 let currentColorTheme = colorThemes[0]
-applyTheme()
-//prep text panel
-generateTextPanel()
-//highlight first word
-getNextWord()
+
+initApp()
 
 document.addEventListener(
     "keyup",
@@ -84,11 +83,14 @@ textInput.addEventListener(
             startedTyping = true
             startTimer()
         }
-        //check word correcness
-        checkWord(event)
 
-        //check character correcness
-        checkChar()
+        if (startedTyping === true) {
+            //check word correcness
+            checkWord(event)
+
+            //check character correcness
+            checkChar()
+        }
     }
 )
 
@@ -134,11 +136,13 @@ themeDefault.addEventListener(
 function gotACorrectWord() {
     currentSpan.style.color = currentColorTheme.correct
     wordCount += 1
+    correctWordCount += 1
     getNextWord()
 }
 
 function gotAWrongWord() {
     currentSpan.style.color = currentColorTheme.error
+    wordCount += 1
     getNextWord()
 }
 
@@ -181,6 +185,7 @@ function getNextWord() {
     }
     else {
         finishedTyping()
+        console.log(startedTyping)
     }
 
 }
@@ -208,6 +213,7 @@ function checkChar() {
 
 function finishedTyping() {
     clearInterval(ticking)
+    startedTyping = false
 }
 
 function startTimer() {
@@ -218,7 +224,9 @@ function startTimer() {
         if (timeElapsedInSec === currentTimeInSec + 1) {
             currentTimeInSec += 1
             let wpm = Math.floor(60 * wordCount / currentTimeInSec)
-            timer.textContent = `WPM: ${wpm}`
+            wpmMeter.textContent = `WPM: ${wpm}`
+            let accuracy = Math.floor(correctWordCount / wordCount * 100)
+            accuracyMeter.textContent = `Accuracy: ${accuracy}%`
         }
     }, 100)
 }
@@ -229,6 +237,7 @@ function resetApp() {
 }
 
 function initApp() {
+    applyTheme()
     generateTextPanel()
     getNextWord()
     startTime = null;
@@ -236,7 +245,8 @@ function initApp() {
     ticking = null;
     wordCount = 0;
     startedTyping = false;
-    timer.textContent = `WPM: 0`
+    wpmMeter.textContent = "WPM: 0"
+    accuracyMeter.textContent = "Accuracy: 0%"
 }
 
 function applyTheme() {
